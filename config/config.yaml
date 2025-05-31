@@ -1,0 +1,114 @@
+mixed-port: 7890
+external-controller: 0.0.0.0:9090
+mode: rule
+allow-lan: true
+log-level: info
+
+dns:
+  enable: true
+  enhanced-mode: fake-ip
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+
+proxy-providers:
+  sid:
+    type: http
+    url: https://provider.com/subscribe-id
+    path: ./proxy/sid.yaml
+    interval: 3600
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+
+  ssg:
+    type: http
+    url: https://provider.com/subscribe-sg
+    path: ./proxy/ssg.yaml
+    interval: 3600
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+
+rule-providers:
+  oisd_big:
+    type: http
+    behavior: classical
+    path: "./rule_provider/oisd_big.yaml"
+    url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml
+    interval: 28800
+
+  oisd_small:
+    type: http
+    behavior: classical
+    path: "./rule_provider/oisd_small.yaml"
+    url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_small.yaml
+    interval: 28800
+
+  adaway:
+    type: http
+    behavior: classical
+    path: "./rule_provider/adaway.yaml"
+    url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/adaway.yaml
+    interval: 28800
+
+  abpindo:
+    type: http
+    behavior: classical
+    path: "./rule_provider/abpindo.yaml"
+    url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/abpindo.yaml
+    interval: 28800
+
+proxy-groups:
+  - name: GLOBAL
+    type: select
+    proxies:
+      - AUTO-SG
+      - AUTO-ID
+      - DIRECT
+
+  - name: AUTO-ID
+    type: url-test
+    use:
+      - sid
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: AUTO-SG
+    type: url-test
+    use:
+      - ssg
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: STREAMING
+    type: select
+    proxies:
+      - AUTO-SG
+      - AUTO-ID
+
+  - name: SOSMED
+    type: select
+    proxies:
+      - AUTO-SG
+      - AUTO-ID
+
+rules:
+  # AdBlock Rules
+  - RULE-SET,oisd_big,REJECT
+  - RULE-SET,oisd_small,REJECT
+  - RULE-SET,adaway,REJECT
+  - RULE-SET,abpindo,REJECT
+  
+  # Traffic Rules
+  - DOMAIN-SUFFIX,netflix.com,STREAMING
+  - DOMAIN-SUFFIX,youtube.com,STREAMING
+  - DOMAIN-SUFFIX,facebook.com,SOSMED
+  - DOMAIN-SUFFIX,instagram.com,SOSMED
+  - GEOIP,ID,AUTO-ID
+  - MATCH,GLOBAL
