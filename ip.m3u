@@ -34,4 +34,7 @@ https://raw.githubusercontent.com/sesukyothole/sesukyothole/refs/heads/main/dens
 #EXTINF:-1 type="playlist",indiatv
 https://raw.githubusercontent.com/sesukyothole/sesukyothole/refs/heads/main/indiatv.m3u
 
+#EXTINF:-1 type="playlist",FREETV
+https://raw.githubusercontent.com/eradigitaltv2025/ERADIGITALTV/refs/heads/main/FREETV
+
 ########################################################################
