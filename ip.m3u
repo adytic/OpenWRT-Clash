@@ -37,4 +37,7 @@ https://raw.githubusercontent.com/sesukyothole/sesukyothole/refs/heads/main/indi
 #EXTINF:-1 type="playlist",FREETV
 https://raw.githubusercontent.com/eradigitaltv2025/ERADIGITALTV/refs/heads/main/FREETV
 
+#EXTINF:-1 type="playlist",udptv
+https://raw.githubusercontent.com/mimipipi22/lalajo/refs/heads/main/udptv
+
 ########################################################################
