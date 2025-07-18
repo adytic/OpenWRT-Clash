@@ -28,12 +28,6 @@ https://raw.githubusercontent.com/AFDigitalTV/Channel/main/donasi
 #EXTINF:-1 type="playlist",laybrot 
 https://raw.githubusercontent.com/denden79den/bubuy/refs/heads/main/laybrot
 
-#EXTINF:-1 type="playlist",denstv2
-https://raw.githubusercontent.com/sesukyothole/sesukyothole/refs/heads/main/denstv.m3u
-
-#EXTINF:-1 type="playlist",indiatv
-https://raw.githubusercontent.com/sesukyothole/sesukyothole/refs/heads/main/indiatv.m3u
-
 #EXTINF:-1 type="playlist",FREETV
 https://raw.githubusercontent.com/eradigitaltv2025/ERADIGITALTV/refs/heads/main/FREETV
 
